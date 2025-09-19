@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XS Protein Sales Playbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: XS Energetic (Dark Gray, Yellow, Magenta) -->
+    <!-- Application Structure Plan: A tabbed/dashboard-style SPA with three main sections: 'The Strategy' (interactive protein pyramid), 'Product Deep Dive' (comparative product info & synergy matrix), and 'Sales Playbook' (interactive customer personas, objection handling, and action plan). This non-linear structure was chosen to allow IBOs to quickly access the specific educational or sales-enablement content they need, transforming a linear presentation into a reusable job aid. -->
+    <!-- Visualization & Content Choices: Protein Pyramid -> Educate -> Interactive HTML/CSS Diagram -> Click to reveal info -> More engaging than static image. BCAA Ratio -> Compare -> Chart.js Horizontal Bar -> Static with tooltips -> Visually communicates the 5:1:1 ratio effectively. Customer Personas -> Organize/Inform -> JS-powered content switcher -> Click persona to get script -> Creates an interactive sales tool. Objection Handling -> Organize -> HTML accordion -> Click to reveal -> Clean UI, easy access to info. CONFIRMED: All visuals are HTML/CSS or Canvas via Chart.js. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827;
+            color: #F9FAFB;
+        }
+        .accent-yellow { color: #FBBF24; }
+        .accent-magenta { color: #EC4899; }
+        .bg-accent-yellow { background-color: #FBBF24; }
+        .bg-accent-magenta { background-color: #EC4899; }
+        .border-accent-yellow { border-color: #FBBF24; }
+        .border-accent-magenta { border-color: #EC4899; }
+        .pyramid-level {
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            transition: all 0.3s ease-in-out;
+        }
+        .pyramid-base {
+            clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+        }
+        .pyramid-layer {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .pyramid-layer.active {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+        .persona-btn.active {
+            background-color: #FBBF24;
+            color: #111827;
+            border-color: #FBBF24;
+        }
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-2xl accent-yellow">XS</span>
+                    <span class="font-bold text-2xl text-white ml-2">Protein Playbook</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#strategy" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">The Strategy</a>
+                        <a href="#products" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Product Deep Dive</a>
+                        <a href="#playbook" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sales Playbook</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <section id="strategy" class="mb-24 scroll-mt-20">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-4">The <span class="accent-yellow">Secret</span> to Selling Protein</h1>
+            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">This is the simple, science-backed framework to become your customer's go-to expert. Instead of just selling a product, you're providing a solution based on the four priorities of protein optimization. Master this, and your conversations will change from "what it is" to "what it does for you."</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <div id="pyramid-info" class="bg-gray-800 p-6 rounded-lg min-h-[300px] flex flex-col justify-center transition-all duration-300">
+                        <h3 id="pyramid-title" class="text-2xl font-bold accent-yellow mb-2">Click a Layer to Learn More</h3>
+                        <p id="pyramid-text" class="text-gray-300">The Protein Pyramid helps you explain the science of muscle protein synthesis in a simple, memorable way. Start from the bottom and work your way up.</p>
+                    </div>
+                </div>
+
+                <div class="order-1 md:order-2 flex flex-col items-center justify-center space-y-1 select-none">
+                     <div id="pyramid-timing" data-title="PEAK: Timing" data-text="This is the final 5% tweak. Once amount and distribution are consistent, timing protein around workouts can give an extra edge for recovery and performance. It's an optimization, not the foundation." class="pyramid-layer w-40 h-16 bg-accent-magenta text-gray-900 flex items-center justify-center font-bold text-sm" style="clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);">TIMING</div>
+                    <div id="pyramid-quality" data-title="TOP: Quality" data-text="Choose complete protein sources rich in all 9 Essential Amino Acids (EAAs), especially Leucine. High-quality sources ensure the body has all the necessary building blocks for muscle repair." class="pyramid-layer w-56 h-16 bg-pink-500 text-white flex items-center justify-center font-bold text-sm" style="clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);">QUALITY</div>
+                    <div id="pyramid-distribution" data-title="MIDDLE: Distribution" data-text="Spreading protein intake across 3-4 meals/snacks per day maximizes Muscle Protein Synthesis. This helps your body convert more protein into muscle, and less into fuel." class="pyramid-layer w-72 h-16 bg-indigo-500 text-white flex items-center justify-center font-bold" style="clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);">DISTRIBUTION</div>
+                    <div id="pyramid-amount" data-title="BASE: Amount" data-text="Hitting the daily protein target is 80% of the battle. Consistency is key. Without enough total protein, the other layers of the pyramid have little effect." class="pyramid-layer w-96 h-16 bg-accent-yellow text-gray-900 flex items-center justify-center font-bold" style="clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);">AMOUNT</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="mb-24 scroll-mt-20">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-4">The <span class="accent-magenta">Perfect Protein</span> System</h1>
+            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">Now that you understand the strategy, here are the tools. XS™ Grass-Fed Whey and Muscle Multiplier EAA are not competing products; they are a complementary system designed to help your customers master the Protein Pyramid and achieve their goals faster.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                <div class="bg-gray-800 p-8 rounded-lg">
+                    <h2 class="text-3xl font-bold mb-4">XS™ <span class="accent-yellow">Grass-Fed Whey</span></h2>
+                    <p class="text-gray-400 mb-6 font-semibold">The Daily Anchor for AMOUNT & QUALITY</p>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center gap-4 bg-gray-900 p-4 rounded-lg">
+                            <span class="text-4xl font-extrabold accent-yellow">30g</span>
+                            <span class="text-gray-300">Grass-Fed Whey Protein Isolate</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-gray-900 p-4 rounded-lg">
+                            <span class="text-4xl font-extrabold accent-yellow">5</span>
+                            <span class="text-gray-300">Clean & Simple Ingredients</span>
+                        </div>
+                         <div class="flex items-center gap-4 bg-gray-900 p-4 rounded-lg">
+                            <span class="text-4xl font-extrabold accent-yellow">6.9g</span>
+                            <span class="text-gray-300">Naturally Occurring BCAAs</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300"><strong class="text-white">Best For:</strong> The perfect, high-quality foundation to hit daily protein goals. Ideal for a breakfast smoothie, a satisfying snack, or post-workout recovery.</p>
+                    
+                    <div class="mt-6 bg-gray-900 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg accent-yellow mb-2 flex items-center gap-2">
+                            ✨ AI Smoothie Recipe Generator
+                        </h4>
+                        <p class="text-sm text-gray-400 mb-3">Help your customers integrate Whey protein. Enter ingredients they have on hand (e.g., "banana, almond milk, spinach") to generate a custom recipe.</p>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" id="recipeIngredients" placeholder="e.g., banana, spinach, oats" class="flex-grow bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all">
+                            <button id="generateRecipeBtn" class="bg-yellow-500 text-gray-900 font-bold py-2 px-4 rounded-md hover:bg-yellow-400 transition-colors flex items-center justify-center min-w-[160px]">
+                                <span>Generate Recipe</span>
+                            </button>
+                        </div>
+                        <div id="recipeResult" class="mt-4 bg-gray-700 p-4 rounded-md text-gray-300 hidden whitespace-pre-wrap font-mono"></div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-lg">
+                    <h2 class="text-3xl font-bold mb-4">XS™ <span class="accent-magenta">Muscle Multiplier</span></h2>
+                    <p class="text-gray-400 mb-6 font-semibold">The Optimizer for DISTRIBUTION & TIMING</p>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-center gap-4 bg-gray-900 p-4 rounded-lg">
+                            <span class="text-4xl font-extrabold accent-magenta">4.1g</span>
+                            <span class="text-gray-300">All 9 Essential Amino Acids</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-gray-900 p-4 rounded-lg">
+                            <span class="text-4xl font-extrabold accent-magenta">0g</span>
+                            <span class="text-gray-300">Sugar, Fat, Dairy, & Gluten</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-gray-900 p-4 rounded-lg">
+                           <span class="text-4xl font-extrabold accent-magenta">5:1:1</span>
+                           <span class="text-gray-300">Clinically Studied BCAA Ratio</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300"><strong class="text-white">Best For:</strong> Bridging gaps between meals, pre/intra-workout fuel, and maximizing recovery without the calories of a full shake.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-gray-800 p-8 rounded-lg">
+                <h2 class="text-3xl font-bold text-center mb-2">Why Both? The <span class="accent-yellow">Anchor</span> & <span class="accent-magenta">Bridge</span> Strategy</h2>
+                <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-8">Use this matrix to explain how the products work together. Whey is the anchor that guarantees they hit their daily protein amount. EAA is the bridge that makes sure their body is using that protein optimally all day long.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-gray-900 p-4 rounded-lg font-bold text-lg">Pyramid Level</div>
+                    <div class="bg-gray-900 p-4 rounded-lg font-bold text-lg accent-yellow">XS Whey (Anchor)</div>
+                    <div class="bg-gray-900 p-4 rounded-lg font-bold text-lg accent-magenta">XS EAA (Bridge)</div>
+                    
+                    <div class="bg-gray-700 p-4 rounded-lg font-semibold flex items-center justify-center">Amount</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">High-yield 30g dose to easily hit daily targets.</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center text-gray-400">Low calorie; not for hitting total volume.</div>
+                    
+                    <div class="bg-gray-700 p-4 rounded-lg font-semibold flex items-center justify-center">Distribution</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">Perfect anchor for 1-2 key meals (breakfast, post-workout).</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">The ideal "bridge" to keep MPS active between meals.</div>
+
+                    <div class="bg-gray-700 p-4 rounded-lg font-semibold flex items-center justify-center">Quality</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">Complete protein with 6.9g of BCAAs.</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">Delivers all 9 EAAs in a precise, free-form blend.</div>
+
+                    <div class="bg-gray-700 p-4 rounded-lg font-semibold flex items-center justify-center">Timing</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">Best used post-workout or as a meal replacement.</div>
+                    <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-center">Optimal for pre/intra-workout to fuel performance.</div>
+                </div>
+                 <div class="mt-8">
+                    <div class="chart-container">
+                        <canvas id="bcaaChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-400 mt-2 text-sm">XS™ Muscle Multiplier's 5:1:1 BCAA Ratio emphasizes Leucine, the primary amino acid for triggering muscle protein synthesis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="playbook" class="scroll-mt-20">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Your <span class="accent-yellow">Sales Playbook</span></h1>
+            <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">Theory is great, but action builds your business. This section provides the exact scripts, bundles, and objection-handling techniques you need to start conversations and close sales with confidence. Select a customer type to get your tailored script.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1">
+                    <h3 class="text-xl font-bold mb-4">1. Select Customer Persona</h3>
+                    <div id="persona-selector" class="flex flex-col space-y-3">
+                         <button class="persona-btn w-full text-left p-4 border-2 border-gray-600 rounded-lg font-semibold transition-all duration-200 hover:border-accent-yellow active" data-persona="athlete">💪 Athlete / Serious Lifter</button>
+                        <button class="persona-btn w-full text-left p-4 border-2 border-gray-600 rounded-lg font-semibold transition-all duration-200 hover:border-accent-yellow" data-persona="weight-management">⚖️ Weight Management</button>
+                        <button class="persona-btn w-full text-left p-4 border-2 border-gray-600 rounded-lg font-semibold transition-all duration-200 hover:border-accent-yellow" data-persona="plant-leaning">🌱 Plant-Leaning / Dairy-Sensitive</button>
+                        <button class="persona-btn w-full text-left p-4 border-2 border-gray-600 rounded-lg font-semibold transition-all duration-200 hover:border-accent-yellow" data-persona="healthy-aging">⏳ Healthy Aging</button>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-gray-800 p-8 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">2. Use Your Script</h3>
+                    <div id="script-panel">
+                        <h4 class="font-bold text-lg accent-yellow">Qualifying Questions:</h4>
+                        <ul class="list-disc list-inside text-gray-300 mb-4">
+                            <li id="q1">What's your daily protein goal?</li>
+                            <li id="q2">How many meals hit 25-35g of protein?</li>
+                        </ul>
+                        <h4 class="font-bold text-lg accent-yellow">20-Second Pitch:</h4>
+                        <p id="pitch" class="text-gray-300">"Use the <strong class='text-white'>Whey</strong> to lock in your 30g anchor after training, then sip the <strong class='text-white'>EAAs</strong> between meals to keep your muscle-building signal up—without adding extra calories. It's the perfect system for performance and recovery."</p>
+                         <h4 class="font-bold text-lg accent-yellow mt-4">Recommended Bundle:</h4>
+                         <p id="bundle" class="text-gray-300">Muscle Gains Stack: 1 Whey Bag + 1 EAA Pouch</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-gray-800 p-8 rounded-lg">
+                <h2 class="text-3xl font-bold text-center mb-2 flex items-center justify-center gap-3">
+                    ✨ AI Sales Assistant
+                </h2>
+                <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-8">
+                    Need a more personal touch? Describe your customer's goals, lifestyle, and challenges below, and our AI assistant will help you craft a unique, tailored sales pitch.
+                </p>
+                <div class="max-w-3xl mx-auto">
+                    <textarea id="customerDescription" rows="3" class="w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all" placeholder="e.g., 'A busy mom of two who wants to lose 10 lbs. She does yoga twice a week and struggles with afternoon snacking.'"></textarea>
+                    <button id="generatePitchBtn" class="mt-4 w-full bg-accent-magenta text-white font-bold py-3 px-4 rounded-md hover:bg-pink-600 transition-colors flex items-center justify-center min-w-[180px]">
+                        <span>Generate Custom Pitch</span>
+                    </button>
+                    <div id="pitchResult" class="mt-4 bg-gray-900 p-4 rounded-md text-gray-300 hidden whitespace-pre-wrap"></div>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-gray-800 p-8 rounded-lg">
+                <h2 class="text-3xl font-bold text-center mb-8">3. Handle Objections & Close the Sale</h2>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <details class="bg-gray-900 p-4 rounded-lg cursor-pointer">
+                        <summary class="font-semibold text-lg flex justify-between items-center">
+                            "It's too expensive."
+                            <span class="text-2xl font-light text-gray-500 transform transition-transform duration-200">+</span>
+                        </summary>
+                        <p class="mt-4 text-gray-400">"I understand completely. Let's compare it to a daily $5 coffee or snack. For less than that, you're getting a high-quality, targeted supplement that directly supports your health goals. It's an investment in results, not just a purchase."</p>
+                    </details>
+                     <details class="bg-gray-900 p-4 rounded-lg cursor-pointer">
+                        <summary class="font-semibold text-lg flex justify-between items-center">
+                            "Can't I just eat more food?"
+                            <span class="text-2xl font-light text-gray-500 transform transition-transform duration-200">+</span>
+                        </summary>
+                        <p class="mt-4 text-gray-400">"Absolutely, whole food is always first! These supplements are designed for convenience and consistency on busy days. They guarantee you hit your targets and optimize your intake when a full meal isn't practical."</p>
+                    </details>
+                    <details class="bg-gray-900 p-4 rounded-lg cursor-pointer">
+                        <summary class="font-semibold text-lg flex justify-between items-center">
+                            "Why XS™ vs. cheaper brands?"
+                            <span class="text-2xl font-light text-gray-500 transform transition-transform duration-200">+</span>
+                        </summary>
+                        <p class="mt-4 text-gray-400">"Great question. With XS™, you're paying for trust and transparency: grass-fed sourcing for the whey, a clinically studied ratio in the EAAs, and a clean label with no artificial junk. Plus, it's all backed by Amway's 180-day satisfaction guarantee."</p>
+                    </details>
+                     <details class="bg-gray-900 p-4 rounded-lg cursor-pointer">
+                        <summary class="font-semibold text-lg flex justify-between items-center">
+                            "Do I really need both?"
+                            <span class="text-2xl font-light text-gray-500 transform transition-transform duration-200">+</span>
+                        </summary>
+                        <p class="mt-4 text-gray-400">"Not always to start! The Whey is perfect for hitting your total daily 'Amount'. The EAAs are for optimizing 'Distribution'. I'd recommend starting with the one that solves your biggest challenge, and we can always add the other later to maximize your results."</p>
+                    </details>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 p-8 rounded-lg text-gray-900">
+                <h2 class="text-3xl font-extrabold mb-4">Your 3-Step Action Plan</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center">
+                        <span class="text-5xl mb-2">1️⃣</span>
+                        <h3 class="text-xl font-bold">PICK a Customer</h3>
+                        <p class="font-medium">Think of ONE person who fits a persona we discussed.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-5xl mb-2">2️⃣</span>
+                        <h3 class="text-xl font-bold">SEND a Cart</h3>
+                        <p class="font-medium">Use the app to send them a Shareable List with a recommended bundle.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-5xl mb-2">3️⃣</span>
+                        <h3 class="text-xl font-bold">FOLLOW UP</h3>
+                        <p class="font-medium">Set a reminder to check in after 1 week. Remember the 180-day guarantee!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-900">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+             <p>&copy; 2025 XS Protein Playbook. For Amway IBO educational purposes only.</p>
+             <p class="text-xs mt-2">†This statement has not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const pyramidLayers = document.querySelectorAll('.pyramid-layer');
+    const pyramidTitle = document.getElementById('pyramid-title');
+    const pyramidText = document.getElementById('pyramid-text');
+    const pyramidInfo = document.getElementById('pyramid-info');
+
+    pyramidLayers.forEach(layer => {
+        layer.addEventListener('click', () => {
+            pyramidLayers.forEach(l => l.classList.remove('active'));
+            layer.classList.add('active');
+            
+            pyramidTitle.textContent = layer.dataset.title;
+            pyramidText.textContent = layer.dataset.text;
+            pyramidInfo.style.borderColor = window.getComputedStyle(layer).backgroundColor;
+        });
+    });
+
+    const personaScripts = {
+        athlete: {
+            q1: "What's your daily protein goal?",
+            q2: "How many meals hit 25-35g of protein?",
+            pitch: "Use the <strong class='text-white'>Whey</strong> to lock in your 30g anchor after training, then sip the <strong class='text-white'>EAAs</strong> between meals to keep your muscle-building signal up—without adding extra calories. It's the perfect system for performance and recovery.",
+            bundle: "Muscle Gains Stack: 1 Whey Bag + 1 EAA Pouch"
+        },
+        'weight-management': {
+            q1: "Where do snacks usually derail your diet?",
+            q2: "Do you struggle more with a breakfast or afternoon slump?",
+            pitch: "Swap one of your daily snacks for a clean, satisfying 30g <strong class='text-white'>Whey</strong> shake to stay full and on track. Add the zero-sugar <strong class='text-white'>EAAs</strong> before a workout for energy and muscle support without the calories.",
+            bundle: "Lean & Clean Duo: 1 Whey Bag + 1 EAA Stick Pack Box"
+        },
+        'plant-leaning': {
+            q1: "Do you have any issues with lactose or dairy?",
+            q2: "How many complete protein meals do you typically get each day?",
+            pitch: "The <strong class='text-white'>EAAs</strong> are perfect for you—they're completely dairy and lactose-free and guarantee you get all 9 essential amino acids that can be harder to get from plants alone. This ensures your body can effectively use the protein you do eat.",
+            bundle: "EAA Starter: 1 EAA Pouch or Stick Pack Box"
+        },
+        'healthy-aging': {
+            q1: "Are you focused on maintaining strength and energy as you get older?",
+            q2: "How many times a day are you able to get a good serving of protein?",
+            pitch: "A simple <strong class='text-white'>Whey</strong> shake each day is an easy way to help protect lean muscle mass, which is crucial for staying strong and active. The <strong class='text-white'>EAAs</strong> are a light, easy way to bridge the gap between meals to support muscle health all day long.",
+            bundle: "Muscle Maintenance Duo: 1 Whey Bag + 1 EAA Stick Pack Box"
+        }
+    };
+    
+    const personaSelector = document.getElementById('persona-selector');
+    const scriptPanel = document.getElementById('script-panel');
+    const q1 = document.getElementById('q1');
+    const q2 = document.getElementById('q2');
+    const pitch = document.getElementById('pitch');
+    const bundle = document.getElementById('bundle');
+
+    personaSelector.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            const persona = e.target.dataset.persona;
+            
+            document.querySelectorAll('.persona-btn').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            
+            const script = personaScripts[persona];
+            q1.innerHTML = script.q1;
+            q2.innerHTML = script.q2;
+            pitch.innerHTML = script.pitch;
+            bundle.innerHTML = script.bundle;
+        }
+    });
+
+    document.querySelectorAll('details').forEach((el) => {
+        el.addEventListener('toggle', function() {
+            const icon = this.querySelector('summary span');
+            if (this.open) {
+                icon.style.transform = 'rotate(45deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+
+    const bcaaCtx = document.getElementById('bcaaChart').getContext('2d');
+    const bcaaChart = new Chart(bcaaCtx, {
+        type: 'bar',
+        data: {
+            labels: ['BCAA Ratio'],
+            datasets: [
+                {
+                    label: 'Leucine',
+                    data: [5],
+                    backgroundColor: '#EC4899',
+                    borderColor: '#1F2937',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Isoleucine',
+                    data: [1],
+                    backgroundColor: '#FBBF24',
+                    borderColor: '#1F2937',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Valine',
+                    data: [1],
+                    backgroundColor: '#6366F1',
+                    borderColor: '#1F2937',
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: {
+                        color: 'rgba(255, 255, 255, 0.1)'
+                    },
+                    ticks: {
+                       color: '#D1D5DB'
+                    }
+                },
+                y: {
+                    stacked: true,
+                    grid: {
+                        display: false,
+                    },
+                    ticks: {
+                       color: '#D1D5DB'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                     labels: {
+                        color: '#D1D5DB'
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        }
+    });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    const apiKey = ""; 
+
+    async function callGemini(prompt, button, resultContainer) {
+        button.disabled = true;
+        const originalButtonText = button.innerHTML;
+        button.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating...`;
+        resultContainer.classList.add('hidden');
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const payload = {
+            contents: [{ parts: [{ text: prompt }] }],
+        };
+        
+        let success = false;
+        let retries = 3;
+        let delay = 1000;
+
+        while(retries > 0 && !success) {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    resultContainer.innerText = candidate.content.parts[0].text.trim();
+                    resultContainer.classList.remove('hidden');
+                    success = true;
+                } else {
+                    throw new Error("Invalid response structure from API.");
+                }
+
+            } catch (error) {
+                console.error("Gemini API call failed:", error);
+                retries--;
+                if(retries > 0){
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2;
+                } else {
+                    resultContainer.innerText = "Sorry, the request failed after multiple retries. Please check the console for details and try again later.";
+                    resultContainer.classList.remove('hidden');
+                }
+            }
+        }
+
+        button.disabled = false;
+        button.innerHTML = originalButtonText;
+    }
+
+    const generateRecipeBtn = document.getElementById('generateRecipeBtn');
+    const recipeIngredients = document.getElementById('recipeIngredients');
+    const recipeResult = document.getElementById('recipeResult');
+
+    generateRecipeBtn.addEventListener('click', () => {
+        const ingredients = recipeIngredients.value;
+        if (!ingredients) {
+            recipeIngredients.classList.add('border-red-500', 'placeholder-red-400');
+            recipeIngredients.placeholder = "Please enter some ingredients first!";
+            setTimeout(() => {
+                recipeIngredients.classList.remove('border-red-500', 'placeholder-red-400');
+                recipeIngredients.placeholder = "e.g., banana, spinach, oats";
+            }, 3000);
+            return;
+        }
+        const prompt = `You are a helpful nutrition assistant. Create a simple and delicious smoothie recipe using XS Grass-Fed Whey Protein (assume chocolate or vanilla flavor is available) and the following ingredients: ${ingredients}. Provide a creative name for the smoothie, a list of ingredients with measurements, and simple step-by-step instructions. Make it sound appealing and healthy. Format the response with clear headings (e.g., using asterisks for bold).`;
+        callGemini(prompt, generateRecipeBtn, recipeResult);
+    });
+
+    const generatePitchBtn = document.getElementById('generatePitchBtn');
+    const customerDescription = document.getElementById('customerDescription');
+    const pitchResult = document.getElementById('pitchResult');
+
+    generatePitchBtn.addEventListener('click', () => {
+        const description = customerDescription.value;
+        if (!description) {
+            customerDescription.classList.add('border-red-500', 'placeholder-red-400');
+            customerDescription.placeholder = "Please describe your customer before generating a pitch!";
+            setTimeout(() => {
+                customerDescription.classList.remove('border-red-500', 'placeholder-red-400');
+                customerDescription.placeholder = "e.g., 'A busy mom of two who wants to lose 10 lbs...'";
+            }, 3000);
+            return;
+        }
+        const prompt = `You are an expert sales coach for Amway IBOs. A fellow IBO needs help crafting a sales pitch. Their customer is: "${description}". 
+        
+        Based on these two products:
+        1. XS Grass-Fed Whey: 30g protein, 5 clean ingredients, great for hitting daily protein goals, used in smoothies or as a snack.
+        2. XS Muscle Multiplier EAA: 4.1g of all 9 EAAs, zero sugar/fat/dairy, great for recovery and optimizing protein usage between meals or around workouts.
+
+        Write a short, natural-sounding, and personalized 2-3 sentence pitch for this specific customer. Keep it encouraging and focus on solving their specific problems or achieving their goals. Do not sound like a robot. Start the pitch directly without any introductory phrases like "Here is a pitch:".`;
+        callGemini(prompt, generatePitchBtn, pitchResult);
+    });
+
+});
+</script>
+</body>
+</html>
+

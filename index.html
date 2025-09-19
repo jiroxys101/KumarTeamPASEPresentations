@@ -89,6 +89,16 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
+        <section id="api-key-setup" class="mb-12 bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-xl font-bold accent-magenta mb-3">AI Feature Setup</h2>
+            <p class="text-gray-300 mb-4 text-sm">To use the AI-powered features (Recipe Generator & Sales Assistant), please enter your Google Gemini API Key below. You can generate a free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="text-yellow-400 hover:underline">Google AI Studio</a>.</p>
+            <div class="flex flex-col sm:flex-row gap-2 items-center">
+                <input type="password" id="geminiApiKeyInput" placeholder="Enter your Gemini API Key" class="flex-grow bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all">
+                <button id="saveApiKeyBtn" class="bg-pink-500 text-white font-bold py-2 px-4 rounded-md hover:bg-pink-600 transition-colors w-full sm:w-auto">Save Key</button>
+            </div>
+            <p id="apiKeyStatus" class="text-sm mt-2 transition-all"></p>
+        </section>
+
         <section id="strategy" class="mb-24 scroll-mt-20">
             <h1 class="text-4xl md:text-5xl font-extrabold text-center mb-4">The <span class="accent-yellow">Secret</span> to Selling Protein</h1>
             <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-12">This is the simple, science-backed framework to become your customer's go-to expert. Instead of just selling a product, you're providing a solution based on the four priorities of protein optimization. Master this, and your conversations will change from "what it is" to "what it does for you."</p>
@@ -511,15 +521,63 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const apiKey = ""; 
+    let apiKey = ''; 
+
+    const geminiApiKeyInput = document.getElementById('geminiApiKeyInput');
+    const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+    const apiKeyStatus = document.getElementById('apiKeyStatus');
+
+    function setApiKey(key) {
+        apiKey = key;
+        if (key) {
+            geminiApiKeyInput.value = '********************';
+            apiKeyStatus.textContent = 'Gemini API Key is set and ready to use.';
+            apiKeyStatus.className = 'text-sm mt-2 transition-all text-green-400';
+        } else {
+            geminiApiKeyInput.value = '';
+            apiKeyStatus.textContent = 'API Key not set. AI features are disabled.';
+            apiKeyStatus.className = 'text-sm mt-2 transition-all text-red-400';
+        }
+    }
+
+    const storedKey = localStorage.getItem('GEMINI_API_KEY');
+    setApiKey(storedKey || '');
+
+    saveApiKeyBtn.addEventListener('click', () => {
+        const inputKey = geminiApiKeyInput.value.trim();
+        if (inputKey && inputKey !== '********************') {
+            localStorage.setItem('GEMINI_API_KEY', inputKey);
+            setApiKey(inputKey);
+            apiKeyStatus.textContent = 'API Key saved successfully!';
+        } else if (!inputKey) {
+            localStorage.removeItem('GEMINI_API_KEY');
+            setApiKey('');
+        }
+    });
+    
+    geminiApiKeyInput.addEventListener('focus', () => {
+        if (geminiApiKeyInput.value === '********************') {
+            geminiApiKeyInput.value = '';
+        }
+    });
 
     async function callGemini(prompt, button, resultContainer) {
+        if (!apiKey) {
+            resultContainer.innerText = "Please set your Gemini API Key in the 'AI Feature Setup' section above to use this feature.";
+            resultContainer.classList.remove('hidden');
+            apiKeyStatus.textContent = 'API Key is required to use AI features.';
+            apiKeyStatus.className = 'text-sm mt-2 transition-all text-red-400';
+            document.getElementById('api-key-setup').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            geminiApiKeyInput.focus();
+            return;
+        }
+
         button.disabled = true;
         const originalButtonText = button.innerHTML;
         button.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Generating...`;
         resultContainer.classList.add('hidden');
 
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
         const payload = {
             contents: [{ parts: [{ text: prompt }] }],
         };
@@ -537,6 +595,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (!response.ok) {
+                    if (response.status === 400) {
+                         const errorData = await response.json();
+                         throw new Error(`API Key is not valid. Please check your key. Server message: ${errorData.error.message}`);
+                    }
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
@@ -547,7 +609,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     resultContainer.innerText = candidate.content.parts[0].text.trim();
                     resultContainer.classList.remove('hidden');
                     success = true;
-                } else {
+                } else if (candidate && candidate.finishReason === "SAFETY") {
+                    throw new Error("Content was blocked due to safety settings. Please adjust your prompt.");
+                } 
+                else {
                     throw new Error("Invalid response structure from API.");
                 }
 
@@ -558,7 +623,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     await new Promise(res => setTimeout(res, delay));
                     delay *= 2;
                 } else {
-                    resultContainer.innerText = "Sorry, the request failed after multiple retries. Please check the console for details and try again later.";
+                    resultContainer.innerText = `Sorry, the request failed. ${error.message}`;
                     resultContainer.classList.remove('hidden');
                 }
             }
@@ -616,4 +681,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-

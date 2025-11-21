@@ -523,62 +523,155 @@
         <section id="products" class="mb-16" aria-labelledby="products-heading">
             <h2 id="products-heading" class="text-3xl md:text-4xl font-bold mb-8 text-center amway-yellow">Recommended Products</h2>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- XS Whey Protein Detailed Card -->
                 <div class="card-hover bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
-                    <h3 class="text-xl font-semibold mb-3 text-center amway-yellow">XS™ Grass-fed Whey Protein</h3>
-                    <div class="flex justify-center space-x-2 mb-4">
-                        <img src="https://www.amway.com/medias/128154-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxNDc5Nzl8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2hjZi9oNjEvOTk3MjUxMjcxODg3OC8xMjgxNTQtZW4tVVMtNDgwcHgtMDF8OGNlZWY0ZGRhMmUzZDdkYzExOWRiYzI2NjZkZjA5ZjRiNDFiNzFjZTQ3OWNhNTljMDE3ODNlMjZiODczMmYwNA" alt="XS Whey Chocolate" class="w-16 h-auto object-contain hover:scale-110 transition-transform">
-                        <img src="https://www.amway.com/medias/128156-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxMzQxMTF8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2gwNi9oNTQvOTk3MjUxNzYzNDA3OC8xMjgxNTYtZW4tVVMtNDgwcHgtMDF8YjUwMmY1NzJkNjk1NmMxMzY0ZTk1MzgyYjk0Zjc4OTcyMGNiOTM1ODUzN2YzMWY1MjY3YTJjNjE4ZGQ4OWJiZA" alt="XS Whey Vanilla" class="w-16 h-auto object-contain hover:scale-110 transition-transform">
-                        <img src="https://www.amway.com/medias/128155-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxMzgzODF8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2g3MC9oYzEvOTk3MjUxNjUxOTk2Ni8xMjgxNTUtZW4tVVMtNDgwcHgtMDF8MTY2OTJlMzViOTIyZmU2NDc0MTM5MDdmNzlhMjMzMTdkNjRlODE1YWNmYWYyOGVkNjNlYTFhNzExM2MxNGVjMA" alt="XS Whey Strawberry" class="w-16 h-auto object-contain hover:scale-110 transition-transform">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="w-full md:w-1/3 flex flex-col items-center">
+                            <h3 class="text-xl font-semibold mb-3 text-center amway-yellow">XS™ Grass-fed Whey Protein</h3>
+                            <div class="flex justify-center space-x-2 mb-4">
+                                <img src="https://www.amway.com/medias/128154-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxNDc5Nzl8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2hjZi9oNjEvOTk3MjUxMjcxODg3OC8xMjgxNTQtZW4tVVMtNDgwcHgtMDF8OGNlZWY0ZGRhMmUzZDdkYzExOWRiYzI2NjZkZjA5ZjRiNDFiNzFjZTQ3OWNhNTljMDE3ODNlMjZiODczMmYwNA" alt="XS Whey Chocolate" class="w-16 h-auto object-contain hover:scale-110 transition-transform">
+                                <img src="https://www.amway.com/medias/128156-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxMzQxMTF8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2gwNi9oNTQvOTk3MjUxNzYzNDA3OC8xMjgxNTYtZW4tVVMtNDgwcHgtMDF8YjUwMmY1NzJkNjk1NmMxMzY0ZTk1MzgyYjk0Zjc4OTcyMGNiOTM1ODUzN2YzMWY1MjY3YTJjNjE4ZGQ4OWJiZA" alt="XS Whey Vanilla" class="w-16 h-auto object-contain hover:scale-110 transition-transform">
+                                <img src="https://www.amway.com/medias/128155-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxMzgzODF8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2g3MC9oYzEvOTk3MjUxNjUxOTk2Ni8xMjgxNTUtZW4tVVMtNDgwcHgtMDF8MTY2OTJlMzViOTIyZmU2NDc0MTM5MDdmNzlhMjMzMTdkNjRlODE1YWNmYWYyOGVkNjNlYTFhNzExM2MxNGVjMA" alt="XS Whey Strawberry" class="w-16 h-auto object-contain hover:scale-110 transition-transform">
+                            </div>
+                            <div class="text-center">
+                                <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full mb-2">Item #: 128155</span>
+                                <p class="text-amway-yellow font-bold">$58.00 <span class="text-gray-400 text-sm font-normal">(Retail)</span></p>
+                                <p class="text-gray-300 text-sm">$52.20 <span class="text-gray-400 text-xs">(IBO Cost)</span></p>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <p class="text-gray-200 mb-4">
+                                High-quality protein source with all essential amino acids to support muscle protein synthesis.
+                                Sourced from grass-fed cows for superior quality and taste.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-blue-900/20 p-3 rounded border border-blue-700/30">
+                                    <span class="block text-2xl font-bold text-white">30g</span>
+                                    <span class="text-xs text-gray-300">Protein</span>
+                                </div>
+                                <div class="bg-blue-900/20 p-3 rounded border border-blue-700/30">
+                                    <span class="block text-2xl font-bold text-white">6.9g</span>
+                                    <span class="text-xs text-gray-300">BCAAs</span>
+                                </div>
+                                <div class="bg-blue-900/20 p-3 rounded border border-blue-700/30">
+                                    <span class="block text-2xl font-bold text-white">0</span>
+                                    <span class="text-xs text-gray-300">Artificial Flavors</span>
+                                </div>
+                                <div class="bg-blue-900/20 p-3 rounded border border-blue-700/30">
+                                    <span class="block text-2xl font-bold text-white">NSF</span>
+                                    <span class="text-xs text-gray-300">Certified</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-semibold text-amway-magenta mb-2">Key Benefits:</h4>
+                            <ul class="text-gray-200 space-y-1 text-sm">
+                                <li>• Supports lean muscle growth and recovery</li>
+                                <li>• Fast-absorbing whey isolate formula</li>
+                                <li>• Keto-friendly, gluten-free, and soy-free</li>
+                                <li>• Naturally sweetened with Stevia</li>
+                            </ul>
+                        </div>
                     </div>
-                    <p class="text-gray-200 mb-4 text-center">
-                        High-quality protein source with all essential amino acids to support muscle protein synthesis.
-                    </p>
-                    <ul class="text-gray-200 space-y-2 text-sm">
-                        <li>• Complete protein profile</li>
-                        <li>• Rapid absorption</li>
-                        <li>• Grass-fed quality</li>
-                        <li>• Great taste options</li>
-                    </ul>
                 </div>
                 
+                <!-- Nutrilite Magnesium Detailed Card -->
                 <div class="card-hover bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
-                    <h3 class="text-xl font-semibold mb-3 text-center amway-yellow">Nutrilite™ Magnesium</h3>
-                    <div class="flex justify-center mb-4">
-                        <img src="https://www.amway.com/medias/128032-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxNzE5MTF8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2g5YS9oYWEvOTk5NDEwMzI5MTkzNC8xMjgwMzItZW4tVVMtNDgwcHgtMDF8NjIxYTM5ZmQ2NzBkYmI5NTllYzdmNTY3N2U2ZmQwMzQ5ZDFkYjAwZTk5Yzk3NTQ3M2RjMWQ1ZWQ0YzkxOGY3NQ" alt="Nutrilite Magnesium" class="h-32 w-auto object-contain hover:scale-105 transition-transform">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="w-full md:w-1/3 flex flex-col items-center">
+                            <h3 class="text-xl font-semibold mb-3 text-center amway-yellow">Nutrilite™ Magnesium</h3>
+                            <div class="flex justify-center mb-4">
+                                <img src="https://www.amway.com/medias/128032-en-US-480px-01?context=bWFzdGVyfGltYWdlc3wxNzE5MTF8aW1hZ2UvcG5nfHN5cy1tYXN0ZXIvaW1hZ2VzL2g5YS9oYWEvOTk5NDEwMzI5MTkzNC8xMjgwMzItZW4tVVMtNDgwcHgtMDF8NjIxYTM5ZmQ2NzBkYmI5NTllYzdmNTY3N2U2ZmQwMzQ5ZDFkYjAwZTk5Yzk3NTQ3M2RjMWQ1ZWQ0YzkxOGY3NQ" alt="Nutrilite Magnesium" class="h-32 w-auto object-contain hover:scale-105 transition-transform">
+                            </div>
+                            <div class="text-center">
+                                <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full mb-2">Item #: 128032</span>
+                                <p class="text-amway-yellow font-bold">$34.00 <span class="text-gray-400 text-sm font-normal">(Retail)</span></p>
+                                <p class="text-gray-300 text-sm">$30.60 <span class="text-gray-400 text-xs">(IBO Cost)</span></p>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <p class="text-gray-200 mb-4">
+                                Supports quality sleep and muscle recovery for optimal anabolic processes.
+                                Features a triple-blend of magnesium sources for enhanced absorption.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-green-900/20 p-3 rounded border border-green-700/30">
+                                    <span class="block text-2xl font-bold text-white">200mg</span>
+                                    <span class="text-xs text-gray-300">Magnesium</span>
+                                </div>
+                                <div class="bg-green-900/20 p-3 rounded border border-green-700/30">
+                                    <span class="block text-2xl font-bold text-white">2x</span>
+                                    <span class="text-xs text-gray-300">Better Absorption</span>
+                                </div>
+                                <div class="bg-green-900/20 p-3 rounded border border-green-700/30">
+                                    <span class="block text-2xl font-bold text-white">3</span>
+                                    <span class="text-xs text-gray-300">Magnesium Sources</span>
+                                </div>
+                                <div class="bg-green-900/20 p-3 rounded border border-green-700/30">
+                                    <span class="block text-2xl font-bold text-white">NSF</span>
+                                    <span class="text-xs text-gray-300">Certified</span>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-semibold text-amway-magenta mb-2">Key Benefits:</h4>
+                            <ul class="text-gray-200 space-y-1 text-sm">
+                                <li>• Promotes relaxation and sleep quality</li>
+                                <li>• Supports muscle and nerve function</li>
+                                <li>• Gentle on the stomach (chelated form)</li>
+                                <li>• Vegan, gluten-free, dairy-free, non-GMO</li>
+                            </ul>
+                        </div>
                     </div>
-                    <p class="text-gray-200 mb-4 text-center">
-                        Supports quality sleep and muscle recovery for optimal anabolic processes.
-                    </p>
-                    <ul class="text-gray-200 space-y-2 text-sm">
-                        <li>• Promotes relaxation</li>
-                        <li>• Supports sleep quality</li>
-                        <li>• Muscle function support</li>
-                        <li>• Stress management</li>
-                    </ul>
                 </div>
-                
-                <div class="card-hover bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
-                    <h3 class="text-xl font-semibold mb-3 text-center amway-yellow">Product Benefits</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-amway-yellow">✓</span>
-                            <span class="text-gray-200 text-sm">Scientifically formulated</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-amway-yellow">✓</span>
-                            <span class="text-gray-200 text-sm">Quality tested</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-amway-yellow">✓</span>
-                            <span class="text-gray-200 text-sm">IBO approved</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-amway-yellow">✓</span>
-                            <span class="text-gray-200 text-sm">Customer favorite</span>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            
+            <!-- Product Comparison Table -->
+            <div class="overflow-x-auto bg-gray-800/30 rounded-lg border border-gray-600/50 p-6">
+                <h3 class="text-xl font-semibold mb-6 text-center amway-yellow">Why Choose Amway Products?</h3>
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="p-3 border-b border-gray-600 text-amway-magenta">Feature</th>
+                            <th class="p-3 border-b border-gray-600 text-white font-bold">XS™ Whey Protein</th>
+                            <th class="p-3 border-b border-gray-600 text-white font-bold">Nutrilite™ Magnesium</th>
+                            <th class="p-3 border-b border-gray-600 text-gray-400">Typical Competitors</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm text-gray-200">
+                        <tr>
+                            <td class="p-3 border-b border-gray-700 font-semibold">Source Quality</td>
+                            <td class="p-3 border-b border-gray-700">Grass-fed, humanely raised</td>
+                            <td class="p-3 border-b border-gray-700">3 natural marine sources</td>
+                            <td class="p-3 border-b border-gray-700">Often grain-fed or synthetic</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border-b border-gray-700 font-semibold">Absorption</td>
+                            <td class="p-3 border-b border-gray-700">Isolate (fast absorbing)</td>
+                            <td class="p-3 border-b border-gray-700">Chelated (2x better absorption)</td>
+                            <td class="p-3 border-b border-gray-700">Concentrate or Oxide (poor absorption)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border-b border-gray-700 font-semibold">Clean Label</td>
+                            <td class="p-3 border-b border-gray-700">No artificial colors/flavors</td>
+                            <td class="p-3 border-b border-gray-700">Non-GMO, Vegan, Gluten-free</td>
+                            <td class="p-3 border-b border-gray-700">Often contain fillers/additives</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border-b border-gray-700 font-semibold">Certification</td>
+                            <td class="p-3 border-b border-gray-700">NSF Content Certified</td>
+                            <td class="p-3 border-b border-gray-700">NSF, Kosher, Halal</td>
+                            <td class="p-3 border-b border-gray-700">Self-certified or none</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 border-b border-gray-700 font-semibold">Anabolic Role</td>
+                            <td class="p-3 border-b border-gray-700">Stimulates muscle synthesis</td>
+                            <td class="p-3 border-b border-gray-700">Optimizes recovery & sleep</td>
+                            <td class="p-3 border-b border-gray-700">Varies by quality</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -586,63 +679,228 @@
         <div class="section-divider mb-16"></div>
         
         <section id="ai-assistant" class="mb-16" aria-labelledby="ai-heading">
-            <h2 id="ai-heading" class="text-3xl md:text-4xl font-bold mb-8 text-center amway-yellow">AI-Powered Nutrition Assistant</h2>
+            <h2 id="ai-heading" class="text-3xl md:text-4xl font-bold mb-8 text-center amway-yellow">AI-Powered Sales Tools</h2>
             
-            <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4 amway-magenta">Get Personalized Recommendations</h3>
-                        <p class="text-gray-200 mb-4">
-                            Our AI assistant can help you understand how to optimize your nutrition for anabolism 
-                            based on your specific goals, activity level, and dietary preferences.
+            <!-- API Key Setup -->
+            <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-600/50 mb-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex-1 w-full">
+                        <label for="apiKeyInput" class="block text-sm font-medium text-gray-300 mb-2">Google Gemini API Key Setup</label>
+                        <div class="flex items-center space-x-3">
+                            <input type="password" id="apiKeyInput" placeholder="Enter your Google Gemini API Key"
+                                   class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-amway-yellow focus:border-transparent outline-none"
+                                   aria-label="Google Gemini API Key">
+                            <button id="saveApiKey" class="bg-amway-magenta hover:bg-pink-700 text-white px-6 py-2 rounded-lg transition-colors duration-200 font-semibold">
+                                Save Key
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">
+                            Your API key is stored securely in your browser's local storage and is never sent to our servers.
+                            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-amway-yellow hover:underline ml-1">Get a key here</a>
                         </p>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-3">
-                                <input type="password" id="apiKeyInput" placeholder="Enter your Google Gemini API Key"
-                                       class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400"
-                                       aria-label="Google Gemini API Key" aria-describedby="apiKeyHelp">
-                                <button id="saveApiKey" class="bg-amway-magenta hover:bg-pink-700 text-white px-4 py-2 rounded-lg transition-colors duration-200"
-                                        aria-label="Save API Key">
-                                    Save
-                                </button>
-                            </div>
-                            <div id="apiKeyHelp" class="text-xs text-gray-400">Enter your Google Gemini API key to enable AI features</div>
-                            
-                            <textarea id="aiPrompt" placeholder="Ask about protein timing, sleep optimization, or supplement recommendations..." 
-                                      class="w-full h-32 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none"></textarea>
-                            
-                            <button id="getAIResponse" class="bg-amway-yellow text-gray-900 hover:bg-yellow-400 font-semibold py-3 px-6 rounded-lg transition-colors duration-200 w-full">
-                                Get AI Response
-                            </button>
-                        </div>
                     </div>
+                    <div class="text-sm text-gray-300 bg-blue-900/20 p-4 rounded border border-blue-700/30 max-w-md">
+                        <p><strong>Note:</strong> These AI features require a valid Google Gemini API key to function. The key enables the Recipe Generator and Sales Assistant tools below.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Recipe Generator -->
+                <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-600/50 flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🍳</span>
+                        <h3 class="text-xl font-semibold amway-yellow">Anabolic Recipe Generator</h3>
+                    </div>
+                    <p class="text-gray-200 mb-4 text-sm">
+                        Generate high-protein recipes using XS Whey Protein based on available ingredients.
+                    </p>
                     
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4 amway-magenta">Sample Questions</h3>
-                        <div class="space-y-3">
-                            <button class="sample-question bg-blue-700/30 hover:bg-blue-600/40 text-gray-200 text-left p-3 rounded-lg border border-blue-600/30 transition-colors duration-200 w-full text-sm"
-                                    aria-label="Sample question: What's the best time to take protein for muscle building? Click to use this question">
-                                "What's the best time to take protein for muscle building?"
+                    <div class="space-y-4 flex-grow">
+                        <div>
+                            <label for="recipeIngredients" class="block text-sm font-medium text-gray-300 mb-2">Available Ingredients</label>
+                            <textarea id="recipeIngredients" placeholder="E.g., banana, oats, peanut butter, almond milk..."
+                                      class="w-full h-24 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none focus:ring-2 focus:ring-amway-yellow focus:border-transparent outline-none"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1">
+                                <label for="recipeType" class="block text-sm font-medium text-gray-300 mb-2">Recipe Type</label>
+                                <select id="recipeType" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-amway-yellow focus:border-transparent outline-none">
+                                    <option value="shake">Protein Shake</option>
+                                    <option value="pancakes">Protein Pancakes</option>
+                                    <option value="oats">Proats (Protein Oats)</option>
+                                    <option value="snack">Protein Snack</option>
+                                </select>
+                            </div>
+                            <button id="generateRecipeBtn" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 h-10 flex items-center">
+                                Generate
                             </button>
-                            <button class="sample-question bg-green-700/30 hover:bg-green-600/40 text-gray-200 text-left p-3 rounded-lg border border-green-600/30 transition-colors duration-200 w-full text-sm"
-                                    aria-label="Sample question: How can I improve my sleep quality for better recovery? Click to use this question">
-                                "How can I improve my sleep quality for better recovery?"
+                        </div>
+                        
+                        <div id="recipeResult" class="mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600/50 hidden">
+                            <h4 class="font-semibold text-amway-yellow mb-2">Suggested Recipe:</h4>
+                            <div id="recipeContent" class="text-gray-200 text-sm whitespace-pre-line"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sales Assistant -->
+                <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-600/50 flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">💼</span>
+                        <h3 class="text-xl font-semibold amway-yellow">AI Sales Assistant</h3>
+                    </div>
+                    <p class="text-gray-200 mb-4 text-sm">
+                        Get tailored sales pitches and conversation starters based on your customer's profile.
+                    </p>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <div>
+                            <label for="customerDesc" class="block text-sm font-medium text-gray-300 mb-2">Customer Description</label>
+                            <textarea id="customerDesc" placeholder="E.g., 45-year-old busy mom looking to lose weight and have more energy..."
+                                      class="w-full h-24 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 resize-none focus:ring-2 focus:ring-amway-yellow focus:border-transparent outline-none"></textarea>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1">
+                                <label for="pitchFocus" class="block text-sm font-medium text-gray-300 mb-2">Focus Area</label>
+                                <select id="pitchFocus" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-amway-yellow focus:border-transparent outline-none">
+                                    <option value="benefits">Key Benefits</option>
+                                    <option value="objections">Handling Objections</option>
+                                    <option value="closing">Closing the Sale</option>
+                                    <option value="science">Scientific Explanation</option>
+                                </select>
+                            </div>
+                            <button id="generatePitchBtn" class="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 h-10 flex items-center">
+                                Generate
                             </button>
-                            <button class="sample-question bg-purple-700/30 hover:bg-purple-600/40 text-gray-200 text-left p-3 rounded-lg border border-purple-600/30 transition-colors duration-200 w-full text-sm"
-                                    aria-label="Sample question: What's the optimal protein intake for my activity level? Click to use this question">
-                                "What's the optimal protein intake for my activity level?"
-                            </button>
-                            <button class="sample-question bg-orange-700/30 hover:bg-orange-600/40 text-gray-200 text-left p-3 rounded-lg border-orange-600/30 transition-colors duration-200 w-full text-sm"
-                                    aria-label="Sample question: How do magnesium and sleep affect muscle recovery? Click to use this question">
-                                "How do magnesium and sleep affect muscle recovery?"
+                        </div>
+                        
+                        <div id="pitchResult" class="mt-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600/50 hidden">
+                            <h4 class="font-semibold text-amway-yellow mb-2">Sales Guidance:</h4>
+                            <div id="pitchContent" class="text-gray-200 text-sm whitespace-pre-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customer Persona Selector -->
+            <div class="mt-8 bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
+                <h3 class="text-xl font-semibold mb-6 text-center amway-yellow">Customer Persona Scripts</h3>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button class="persona-btn active bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full border border-gray-500 transition-all duration-200" data-persona="athlete">
+                        🏋️ The Athlete
+                    </button>
+                    <button class="persona-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full border border-gray-500 transition-all duration-200" data-persona="weight-loss">
+                        ⚖️ Weight Management
+                    </button>
+                    <button class="persona-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full border border-gray-500 transition-all duration-200" data-persona="busy-pro">
+                        💼 Busy Professional
+                    </button>
+                    <button class="persona-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-full border border-gray-500 transition-all duration-200" data-persona="healthy-aging">
+                        👴 Healthy Aging
+                    </button>
+                </div>
+                
+                <div id="personaContent" class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                    <!-- Content injected via JS -->
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold amway-magenta mb-3">Qualifying Questions</h4>
+                            <ul class="space-y-2 text-gray-300 text-sm list-disc pl-5">
+                                <li>"How is your current recovery after workouts?"</li>
+                                <li>"Are you hitting your daily protein targets?"</li>
+                                <li>"Do you struggle with muscle soreness or sleep?"</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold amway-magenta mb-3">Key Talking Points</h4>
+                            <ul class="space-y-2 text-gray-300 text-sm list-disc pl-5">
+                                <li>"XS Whey provides 30g of fast-absorbing protein for immediate recovery."</li>
+                                <li>"Magnesium supports muscle relaxation and better sleep for growth."</li>
+                                <li>"NSF Certified for Sport ensures clean, safe ingredients."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Objection Handling & Action Plan -->
+            <div class="grid md:grid-cols-2 gap-8 mt-8">
+                <!-- Objection Handling -->
+                <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
+                    <h3 class="text-xl font-semibold mb-4 amway-yellow">Handling Common Objections</h3>
+                    <div class="space-y-3">
+                        <details class="group bg-gray-700/30 rounded-lg border border-gray-600/30">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 text-gray-200 hover:text-amway-yellow transition-colors">
+                                <span>"It's too expensive"</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="text-gray-300 text-sm p-3 pt-0 leading-relaxed">
+                                Break down the cost per serving ($2.61 for protein). Compare it to a coffee or fast food meal. Emphasize the value of 30g high-quality isolate vs. cheaper concentrates.
+                            </div>
+                        </details>
+                        <details class="group bg-gray-700/30 rounded-lg border border-gray-600/30">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 text-gray-200 hover:text-amway-yellow transition-colors">
+                                <span>"I already take a multivitamin"</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="text-gray-300 text-sm p-3 pt-0 leading-relaxed">
+                                Most multis don't contain enough magnesium (bulky mineral). Explain that 200mg is hard to fit in a multi. This specific form is for targeted sleep/muscle support.
+                            </div>
+                        </details>
+                        <details class="group bg-gray-700/30 rounded-lg border border-gray-600/30">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-3 text-gray-200 hover:text-amway-yellow transition-colors">
+                                <span>"I get enough protein from food"</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="text-gray-300 text-sm p-3 pt-0 leading-relaxed">
+                                Validate their diet, but highlight the convenience and absorption speed of whey isolate post-workout. It's about timing and efficiency, not just total amount.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                
+                <!-- Sales Action Plan -->
+                <div class="bg-gray-800/30 p-6 rounded-lg border border-gray-600/50">
+                    <h3 class="text-xl font-semibold mb-4 amway-yellow">Sales Action Plan</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">1</div>
+                            <div>
+                                <h4 class="font-semibold text-white">Assess Needs</h4>
+                                <p class="text-sm text-gray-300">Ask about their fitness goals, recovery, and sleep quality. Use the persona questions.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">2</div>
+                            <div>
+                                <h4 class="font-semibold text-white">Educate & Solution</h4>
+                                <p class="text-sm text-gray-300">Show the Anabolism chart. Explain how Protein builds and Magnesium recovers. Present the bundle.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold">3</div>
+                            <div>
+                                <h4 class="font-semibold text-white">Close & Follow-up</h4>
+                                <p class="text-sm text-gray-300">Offer to set up a MyShop cart. Schedule a check-in for 3 days after they receive products.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-4 border-t border-gray-600/50">
+                            <button class="w-full bg-amway-yellow text-gray-900 hover:bg-yellow-400 font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                <span class="mr-2">🛒</span> Create Shareable Cart
                             </button>
                         </div>
                     </div>
-                
-                <div id="aiResponse" class="mt-6 p-4 bg-gray-700/50 rounded-lg border border-gray-600/50 hidden">
-                    <h4 class="font-semibold text-amway-yellow mb-2">AI Response:</h4>
-                    <div id="responseContent" class="text-gray-200"></div>
                 </div>
             </div>
         </section>
@@ -854,15 +1112,145 @@
                     }
                 });
                 
-                // Sample question buttons
-                document.querySelectorAll('.sample-question').forEach(button => {
-                    button.addEventListener('click', function() {
-                        document.getElementById('aiPrompt').value = this.textContent;
+                // Recipe Generator Button
+                const generateRecipeBtn = document.getElementById('generateRecipeBtn');
+                if (generateRecipeBtn) {
+                    generateRecipeBtn.addEventListener('click', function() {
+                        const ingredients = document.getElementById('recipeIngredients').value.trim();
+                        const type = document.getElementById('recipeType').value;
+                        
+                        if (!ingredients) {
+                            alert('Please enter available ingredients');
+                            return;
+                        }
+                        
+                        const prompt = `Create a high-protein ${type} recipe using XS Whey Protein and these ingredients: ${ingredients}. Include macros if possible. Keep it brief and easy to follow.`;
+                        callGemini(prompt, 'recipeResult', 'recipeContent');
+                    });
+                }
+                
+                // Sales Pitch Generator Button
+                const generatePitchBtn = document.getElementById('generatePitchBtn');
+                if (generatePitchBtn) {
+                    generatePitchBtn.addEventListener('click', function() {
+                        const description = document.getElementById('customerDesc').value.trim();
+                        const focus = document.getElementById('pitchFocus').value;
+                        
+                        if (!description) {
+                            alert('Please enter a customer description');
+                            return;
+                        }
+                        
+                        let focusText = '';
+                        switch(focus) {
+                            case 'benefits': focusText = 'highlighting key product benefits'; break;
+                            case 'objections': focusText = 'addressing potential objections'; break;
+                            case 'closing': focusText = 'focusing on closing the sale'; break;
+                            case 'science': focusText = 'explaining the science simply'; break;
+                        }
+                        
+                        const prompt = `Act as an expert Amway sales mentor. Generate a short, effective sales pitch for XS Whey Protein and Nutrilite Magnesium for a customer who is: "${description}". Focus on ${focusText}. Keep it conversational and under 150 words.`;
+                        callGemini(prompt, 'pitchResult', 'pitchContent');
+                    });
+                }
+                
+                // Persona Selector Logic
+                const personaBtns = document.querySelectorAll('.persona-btn');
+                const personaContent = document.getElementById('personaContent');
+                
+                const personaScripts = {
+                    'athlete': {
+                        questions: [
+                            "How is your current recovery after workouts?",
+                            "Are you hitting your daily protein targets?",
+                            "Do you struggle with muscle soreness or sleep?"
+                        ],
+                        points: [
+                            "XS Whey provides 30g of fast-absorbing protein for immediate recovery.",
+                            "Magnesium supports muscle relaxation and better sleep for growth.",
+                            "NSF Certified for Sport ensures clean, safe ingredients."
+                        ]
+                    },
+                    'weight-loss': {
+                        questions: [
+                            "Are you looking for a low-calorie way to stay full?",
+                            "Do you crave sweets in the evening?",
+                            "How is your energy level during workouts?"
+                        ],
+                        points: [
+                            "XS Whey is low in sugar/fat but high in satiety to curb cravings.",
+                            "Protein helps maintain lean muscle which burns more calories at rest.",
+                            "Magnesium supports energy metabolism without stimulants."
+                        ]
+                    },
+                    'busy-pro': {
+                        questions: [
+                            "Do you often skip meals due to time?",
+                            "Is stress affecting your sleep quality?",
+                            "Do you need a quick, healthy option on the go?"
+                        ],
+                        points: [
+                            "XS Whey is a perfect quick breakfast or snack in seconds.",
+                            "Magnesium helps manage stress and improves sleep efficiency.",
+                            "Convenient nutrition that fits a busy lifestyle."
+                        ]
+                    },
+                    'healthy-aging': {
+                        questions: [
+                            "Are you concerned about maintaining muscle mass?",
+                            "Do you want to support bone and heart health?",
+                            "Is sleep becoming more difficult?"
+                        ],
+                        points: [
+                            "Protein is crucial for preventing age-related muscle loss (sarcopenia).",
+                            "Magnesium supports heart health, bone density, and sleep.",
+                            "Easy to digest formula that's gentle on the stomach."
+                        ]
+                    }
+                };
+                
+                personaBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Update active state
+                        personaBtns.forEach(b => b.classList.remove('active', 'bg-gray-600'));
+                        personaBtns.forEach(b => b.classList.add('bg-gray-700'));
+                        this.classList.remove('bg-gray-700');
+                        this.classList.add('active', 'bg-gray-600');
+                        
+                        const persona = this.getAttribute('data-persona');
+                        const data = personaScripts[persona];
+                        
+                        if (data) {
+                            // Update content with animation
+                            personaContent.style.opacity = '0';
+                            setTimeout(() => {
+                                let questionsHtml = '';
+                                data.questions.forEach(q => questionsHtml += `<li>"${q}"</li>`);
+                                
+                                let pointsHtml = '';
+                                data.points.forEach(p => pointsHtml += `<li>"${p}"</li>`);
+                                
+                                personaContent.innerHTML = `
+                                    <div class="grid md:grid-cols-2 gap-8">
+                                        <div>
+                                            <h4 class="text-lg font-semibold amway-magenta mb-3">Qualifying Questions</h4>
+                                            <ul class="space-y-2 text-gray-300 text-sm list-disc pl-5">
+                                                ${questionsHtml}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold amway-magenta mb-3">Key Talking Points</h4>
+                                            <ul class="space-y-2 text-gray-300 text-sm list-disc pl-5">
+                                                ${pointsHtml}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                `;
+                                personaContent.style.opacity = '1';
+                            }, 200);
+                        }
                     });
                 });
-                
-                // Get AI response button
-                document.getElementById('getAIResponse').addEventListener('click', getAIResponse);
                 
                 // Smooth scrolling for navigation links
                 document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
@@ -1080,7 +1468,8 @@
             let lastApiCallTime = 0;
             const API_COOLDOWN_MS = 5000; // 5 seconds cooldown between calls
 
-            async function getAIResponse() {
+            // Generic function to call Gemini API
+            async function callGemini(prompt, resultElementId, contentElementId) {
                 // Check rate limiting
                 const currentTime = Date.now();
                 if (currentTime - lastApiCallTime < API_COOLDOWN_MS) {
@@ -1091,13 +1480,7 @@
 
                 // Use the same obfuscated key name for retrieval
                 const obfuscatedKey = 'g' + 'e' + 'm' + 'i' + 'n' + 'i' + '_' + 'a' + 'p' + 'i' + '_' + 'k' + 'e' + 'y';
-                const prompt = document.getElementById('aiPrompt').value.trim();
                 const encryptedApiKey = localStorage.getItem(obfuscatedKey);
-                
-                if (!prompt) {
-                    alert('Please enter a question');
-                    return;
-                }
                 
                 if (!encryptedApiKey) {
                     alert('Please enter and save your Google Gemini API key first');
@@ -1111,16 +1494,16 @@
                     return;
                 }
                 
-                const responseDiv = document.getElementById('aiResponse');
-                const contentDiv = document.getElementById('responseContent');
+                const resultDiv = document.getElementById(resultElementId);
+                const contentDiv = document.getElementById(contentElementId);
                 
                 try {
                     // Update last API call time
                     lastApiCallTime = Date.now();
 
                     // Show loading state
-                    contentDiv.textContent = 'Processing your request...';
-                    responseDiv.classList.remove('hidden');
+                    contentDiv.textContent = 'Generating response...';
+                    resultDiv.classList.remove('hidden');
                     
                     // Call Gemini API
                     const apiResponse = await fetch(`${CONFIG.GEMINI_API_URL}?key=${apiKey}`, {
@@ -1131,14 +1514,15 @@
                         body: JSON.stringify({
                             contents: [{
                                 parts: [{
-                                    text: `You are an expert nutritionist and health advisor. Please provide evidence-based, professional advice about anabolism, protein intake, magnesium, sleep, and related topics. The question is: ${prompt}`
+                                    text: prompt
                                 }]
                             }]
                         })
                     });
                     
                     if (!apiResponse.ok) {
-                        throw new Error(`API request failed with status ${apiResponse.status}`);
+                        const errorData = await apiResponse.json().catch(() => ({}));
+                        throw new Error(`API request failed: ${errorData.error?.message || apiResponse.statusText}`);
                     }
                     
                     const data = await apiResponse.json();
@@ -1147,7 +1531,7 @@
                     
                 } catch (error) {
                     console.error('Error calling Gemini API:', error);
-                    contentDiv.textContent = `Error: ${error.message || 'Failed to get response from AI service'}`;
+                    contentDiv.textContent = `Error: ${error.message || 'Failed to get response from AI service. Please check your API key and try again.'}`;
                 }
             }
             

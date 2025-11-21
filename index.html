@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PASE Presentations - Supporting Anabolism Presentation Tool</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💪</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -924,7 +925,7 @@
                 ENCRYPTION_KEY: (window.PASE_ENV && window.PASE_ENV.ENCRYPTION_KEY) ||
                                (window.PASE_CONFIG && window.PASE_CONFIG.ENCRYPTION_KEY) ||
                                ('PASE' + '_PRESENTATION' + '_SECURE' + '_KEY_2025'),
-                GEMINI_API_URL: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'
+                GEMINI_API_URL: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent'
             };
             
             // Initialize charts when DOM is loaded
@@ -1069,9 +1070,9 @@
                     const sanitizedApiKey = apiKey.replace(/[^a-zA-Z0-9_-]/g, '');
                     
                     // Validate the API key format
-                    const apiKeyRegex = /^AIza[0-9A-Za-z_-]{33}$/;
+                    const apiKeyRegex = /^AIza[0-9A-Za-z_-]{35}$/;
                     if (!apiKeyRegex.test(sanitizedApiKey)) {
-                        alert('Invalid API key format. Google Gemini API keys should start with "AIza" followed by 33 characters.');
+                        alert('Invalid API key format. Google Gemini API keys should start with "AIza" followed by 35 characters.');
                         return;
                     }
                     
@@ -1372,7 +1373,7 @@
                         {
                             name: 'PBKDF2',
                             salt: salt,
-                            iterations: 10000,
+                            iterations: 100000,
                             hash: 'SHA-256'
                         },
                         baseKey,
